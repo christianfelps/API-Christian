@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "target": "es5",               // Versão do JS alvo
+    "module": "nodenext",               // Tipo de módulo
+    "moduleResolution": "nodenext",       // Resolver imports como o Node
+    "outDir": "./dist",               // Pasta de saída
+    "rootDir": "./src",               // Pasta de origem
+    "esModuleInterop": true,          // Permitir import padrão de módulos CommonJS
+    "strict": true,                   // Ativar checagens mais rigorosas (opcional)
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "./jest.config.ts",
+    "./tests",
+    "./build",
+  ],
+  "isolatedModules": true,
+}
