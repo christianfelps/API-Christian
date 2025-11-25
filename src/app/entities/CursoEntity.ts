@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import {Length} from "class-validator"
-@Entity()
+@Entity("cursos")
 export class Curso {
 
     
@@ -8,9 +8,9 @@ export class Curso {
     id!: number;
 
     @Column('varchar', {nullable: false})
-    @Length(10, 1000)
-    task!: string
+    @Length(10, 30)
+    nome!: string;
     
-    @Column("boolean", {nullable: false})
-    done: boolean = false
+    @Column("decimal", { precision: 10, scale: 2 })
+    valor!: number;
 }

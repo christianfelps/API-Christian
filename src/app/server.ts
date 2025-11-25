@@ -1,13 +1,13 @@
 import app from './app'
-import { AppDataSource } from './database/dataSource'
+import { appDataSource } from './database/dataSource'
 
 class Server{
     private server = app;
-    private appDataSource = new AppDataSource();
+    private appDataSource = appDataSource;
 
     async run(port: number): Promise<void | Error> {
         try{
-            await this.appDataSource.iniciar()
+            await appDataSource.initialize()
             console.log("Banco conectado com sucesso")
             this.server.listen(port, () => console.log("server running at http://localhost:3000"));
             ;

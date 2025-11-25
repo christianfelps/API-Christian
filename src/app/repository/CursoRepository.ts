@@ -1,17 +1,15 @@
+import { injectable } from "tsyringe";
 import { Curso } from "../entities/CursoEntity";
-import { autoInjectable } from "tsyringe";
 import { DataSource, Repository } from "typeorm";
 
+@injectable()
 export class CursoRepository {
-
-   private appDataSource: DataSource
 
    private repositoryCurso: Repository<Curso>;
    
-constructor(appDataSource: DataSource){
-   this.appDataSource = appDataSource,
-   this.repositoryCurso = this.appDataSource.getRepository(Curso)
-}
+   constructor(private appDataSource: DataSource){
+      this.repositoryCurso = this.appDataSource.getRepository(Curso)
+   }
    
    public getAll (): Promise<Curso[]>{
     return this.repositoryCurso.find()
@@ -19,15 +17,14 @@ constructor(appDataSource: DataSource){
 
    public async create (curso: Curso): Promise<Curso | Error >{
      try{
-       const newCurso = await this.repositoryCurso.create(curso);
-       if(!newCurso){
-        throw new Error('erro ao cadastro novo curso')
-        
-       }
-       return newCurso;
-       }catch(error){
+       const newCurso = this.repositoryCurso.create(curso);
+       const saveCurso = await this.repositoryCurso.save(newCurso)
+       
+
+       return saveCurso;
+       } catch(error) {
          console.error(error)
-          throw error
+         return new Error("Erro ao salvar o curso")
        }
    }
 

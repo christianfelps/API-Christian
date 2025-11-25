@@ -6,7 +6,8 @@ import { CursoRepository } from '../repository/CursoRepository'
 export class CursoService {
     constructor( 
         @inject(CursoRepository) 
-        private cursoRepository: CursoRepository){}
+        private cursoRepository: CursoRepository
+    ){}
 
     public async findAll(): Promise<Curso[] | Error>{
        const cursos = await this.cursoRepository.getAll();
@@ -14,25 +15,9 @@ export class CursoService {
         return cursos;
     }
 
-    // public async findById(id: number): Promise<Curso | Error>{
-    //     try{
-    //         const findedCurso = await this.cursoRepository.findOneBy({id: id});
-    //         if(!findedCurso){
-    //             throw new Error("Curso ID not found");
-    //         }
-    //         return findedCurso;
-    //     }catch(error){
-    //         return Error("Curso ID not found");
-    //     }
-       
-    // }
+   
 
-    public async create(Curso: Curso): Promise<Curso | Error>{
-        try{
-            const newCurso = this.cursoRepository.create(Curso);
-            return newCurso;
-        }catch(error){
-            return Error("Informações erradas");
-        }
+    public async create(curso: Curso): Promise<Curso | Error>{
+       return this.cursoRepository.create(curso)
     }
 }
