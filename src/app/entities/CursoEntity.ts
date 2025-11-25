@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import {Length} from "class-validator"
 @Entity()
-export class Task {
+export class Curso {
 
     
     @PrimaryGeneratedColumn("increment")

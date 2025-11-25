@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "./container/container";
 import express, {Express} from 'express'
 import { Routes } from "./routes/Routes";
  
@@ -23,7 +24,7 @@ class App {
     } 
 
     rotas(){
-        this.app.use(this.routes.routes)
+        this.app.use('/curso', this.routes.routes)
     }
 
 }

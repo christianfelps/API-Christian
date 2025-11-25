@@ -1,17 +1,19 @@
 import { DataSource } from 'typeorm'
-import { Task } from '../entities/TaskEntity'
+import { Curso } from '../entities/CursoEntity'
+import { injectable } from 'tsyringe';
+@injectable()
 export class  AppDataSource {
-    private appDataSource: DataSource;
+    public appDataSource: DataSource;
 
     constructor(){
         this.appDataSource = new DataSource({
             type: "mysql",
             host: "localhost",
             port: 3306,
-            database: "todo",
+            database: "api",
             username: "root",
             password: "1408",
-            entities: [Task]
+            entities: [Curso]
         })
         
     
@@ -26,4 +28,5 @@ export class  AppDataSource {
         }
       
     }
+
 }
