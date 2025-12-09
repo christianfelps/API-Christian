@@ -15,6 +15,15 @@ export class CursoService {
         return cursos;
     }
 
+    public async findById(id: number):Promise<Curso | Error>{
+
+        const cursoId = await this.cursoRepository.getId(id);
+        if(!cursoId){
+            return new Error("Não há cursos registrados com esse ID"); 
+        }
+        return cursoId
+
+    }
    
 
     public async create(curso: Curso): Promise<Curso | Error>{

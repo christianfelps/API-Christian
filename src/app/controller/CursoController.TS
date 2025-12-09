@@ -2,6 +2,7 @@ import {Request, Response} from 'express'
 import {CursoService} from '../service/CursoService'
 import { Curso } from '../entities/CursoEntity';
 import {inject, injectable } from 'tsyringe';
+import { IParams } from '../interfaces/Interfaces';
 
 @injectable()
 export class CursoController{
@@ -25,6 +26,18 @@ export class CursoController{
     public getAll = async (req: Request<{}, {}, Curso[]>, res: Response)=>{
         try {
             const curso = await this.CursoService.findAll();
+            if(curso instanceof Error)
+                return res.status(400).json({ msg: curso.message });
+
+            return res.status(201).json(curso)
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno", error})
+        }
+    }
+
+    public getById = async (req: Request<IParams>, res: Response)=>{
+        try {
+            const curso = await this.CursoService.findById(Number(req.params.id));
             if(curso instanceof Error)
                 return res.status(400).json({ msg: curso.message });
 

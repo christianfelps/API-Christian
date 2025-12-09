@@ -15,9 +15,14 @@ export class CursoRepository {
     return this.repositoryCurso.find()
    }
 
+   public getId(id: number){
+      return this.repositoryCurso.findOneBy({id})
+   }
+
    public async create (curso: Curso): Promise<Curso | Error >{
      try{
        const newCurso = this.repositoryCurso.create(curso);
+       
        const saveCurso = await this.repositoryCurso.save(newCurso)
        
 
@@ -27,5 +32,7 @@ export class CursoRepository {
          return new Error("Erro ao salvar o curso")
        }
    }
+
+
 
 }
