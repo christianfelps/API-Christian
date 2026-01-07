@@ -1,8 +1,6 @@
 import { Router } from "express";
 import {CursoController} from "../controller/CursoController"
 import { container } from "tsyringe";
-import { Request, Response } from "express";
-import { Curso } from "../entities/CursoEntity";
 export class Routes {
     public routes: Router;
     private cursoController;

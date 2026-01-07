@@ -21,12 +21,21 @@ export class CursoService {
         if(!cursoId){
             return new Error("Não há cursos registrados com esse ID"); 
         }
-        return cursoId
+        return cursoId;
 
     }
    
 
     public async create(curso: Curso): Promise<Curso | Error>{
-       return this.cursoRepository.create(curso)
+       return this.cursoRepository.create(curso);
     }
+
+    public async update(id: number, curso: Curso){
+         const cursoUpdated = await this.cursoRepository.update(id, curso)
+        if(!cursoUpdated){
+            return new Error("Erro ao atualizar curso")
+        }
+        return cursoUpdated
+    }
+
 }
