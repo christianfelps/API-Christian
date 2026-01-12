@@ -11,6 +11,7 @@ export class Routes {
         this.create();
         this.getAll();
         this.getID();
+        this.update();
         }
 
    public create(){
@@ -22,4 +23,9 @@ export class Routes {
    public getID(){
     this.routes.get('/:id', (req, res) => this.cursoController.getById(req, res))
    }
+
+   public update(){
+    this.routes.put('/:id', (req, res) => this.cursoController.update(req, res) )
+   }
+
 }

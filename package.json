@@ -28,6 +28,7 @@
   "dependencies": {
     "class-validator": "^0.14.2",
     "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
     "mysql2": "^3.15.2",
     "nodemon": "^3.1.10",
     "reflect-metadata": "^0.2.2",

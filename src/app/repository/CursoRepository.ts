@@ -19,15 +19,12 @@ export class CursoRepository {
       return await this.repositoryCurso.findOneBy({id})
    }
 
-   public async create (curso: Curso): Promise<Curso | Error >{
-     try{
-         const newCurso = this.repositoryCurso.create(curso);
-         const saveCurso = await this.repositoryCurso.save(newCurso);
-         return saveCurso;
-       }catch(error) {
-            console.error(error);
-            return new Error("Erro ao salvar o curso");
-       }
+   public async create (curso: Curso): Promise<Curso>{
+         return await this.repositoryCurso.save(
+            this.repositoryCurso.create(curso)
+         );
+        
+       
    }
 
     public async update(id: number, curso: Curso){
@@ -39,6 +36,11 @@ export class CursoRepository {
       })
       return await this.repositoryCurso.findOneBy({id});
 
+   }
+
+   public async deleteCurso(id: number): Promise<null>{
+      await this.repositoryCurso.delete(id)
+      return  null
    }
 
 
