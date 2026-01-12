@@ -52,4 +52,14 @@ export class CursoController {
         }
 
     }
+
+    public delete = async (req: Request<IParams>, res: Response) => {
+        try {
+            const curso = await this.CursoService.remove(Number(req.params.id));
+            return res.sendStatus(StatusCodes.NO_CONTENT);
+        } catch (error) {
+            res.send(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Erro interno", error});
+        }
+
+    }   
 }

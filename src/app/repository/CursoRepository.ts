@@ -2,6 +2,7 @@ import { injectable } from "tsyringe";
 import { Curso } from "../entities/CursoEntity";
 import { DataSource, Repository } from "typeorm";
 
+
 @injectable()
 export class CursoRepository {
 
@@ -38,9 +39,8 @@ export class CursoRepository {
 
    }
 
-   public async deleteCurso(id: number): Promise<null>{
-      await this.repositoryCurso.delete(id)
-      return  null
+   public async deleteCurso(id: number): Promise<void>{
+      await this.repositoryCurso.delete(id);
    }
 
 

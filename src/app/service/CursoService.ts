@@ -42,10 +42,12 @@ export class CursoService {
         return cursoUpdated
     }
 
-    public async remove(id: number): Promise<null | Error> {
-        const cursoToRemove = this.findById(id);
-        if (!cursoToRemove) throw new Error("Curso não encontrada!");
-        return await this.cursoRepository.deleteCurso(id)
-    }
+   public async remove(id: number): Promise<void> {
+    console.log("Iniciando busca para remover curso:", id);
+    const cursoToRemove = await this.findById(id);
+    console.log("Busca concluída, iniciando delete:", cursoToRemove.id);
+    await this.cursoRepository.deleteCurso(cursoToRemove.id);
+    console.log("Delete concluído");
+}
 
 }

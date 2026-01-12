@@ -12,6 +12,7 @@ export class Routes {
         this.getAll();
         this.getID();
         this.update();
+        this.delete();
         }
 
    public create(){
@@ -28,4 +29,7 @@ export class Routes {
     this.routes.put('/:id', (req, res) => this.cursoController.update(req, res) )
    }
 
+   public delete(){
+    this.routes.delete('/:id', (req, res) => this.cursoController.delete(req, res) )
+   }
 }
