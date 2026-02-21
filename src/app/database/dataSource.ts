@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { Curso } from "../entities/CursoEntity";
+
 
 export const appDataSource = new DataSource({
             type: "mysql",
@@ -7,8 +7,11 @@ export const appDataSource = new DataSource({
             port: 3306,
             database: "api",
             username: "root",
-            password: "1408",
-            entities: [Curso]
+            password: "root",
+            synchronize: false,
+            logging: false,
+            entities: ["src/app/entities/*.ts"],
+            migrations: ["src/app/database/migration/*.ts"],
         });
         
     

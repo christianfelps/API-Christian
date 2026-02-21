@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { Curso } from "../entities/CursoEntity";
+import { CursoEntity as Curso } from "../entities/CursoEntity";
 import { CursoRepository } from '../repository/CursoRepository'
 
 @injectable()

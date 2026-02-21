@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { CursoService } from '../service/CursoService'
-import { Curso } from '../entities/CursoEntity';
+import { CursoEntity  as Curso} from '../entities/CursoEntity';
 import { inject, injectable } from 'tsyringe';
 import { IParams } from '../interfaces/Interfaces';
 import { StatusCodes } from 'http-status-codes';
@@ -41,10 +41,31 @@ export class CursoController {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Erro interno", error })
         }
     }
-
+ // Se eu n receber nada do body nao atualizo 
+ // mas
+ // se eu receber somente o nome atualizo so o nome
     public update = async (req: Request<IParams>, res: Response) => {
         try {
-            const curso = await this.CursoService.update(Number(req.params.id), req.body);
+            const cursoParaAtualizar = await this.CursoService.findById(Number(req.params.id));
+
+            const atualiza: Curso = {
+                id: cursoParaAtualizar.id,
+                nome: cursoParaAtualizar.nome,
+                descricao: cursoParaAtualizar.descricao,
+                preco: cursoParaAtualizar.preco
+            }
+            if(req.body.nome) {
+                atualiza.nome = req.body.nome;
+            }
+            if(req.body.descricao) {
+                atualiza.descricao = req.body.descricao;
+            }
+            if(req.body.preco) {
+                atualiza.preco = req.body.preco;
+            }
+            const atualizar: Curso = { ...atualiza}
+            
+            const curso = await this.CursoService.update(Number(req.params.id), atualizar);
             if (curso instanceof Error) return res.status(StatusCodes.NOT_FOUND).json({ msg: curso.message });
             return res.status(StatusCodes.OK).json(curso);
         } catch (error) {

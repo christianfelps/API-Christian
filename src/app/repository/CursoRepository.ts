@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { Curso } from "../entities/CursoEntity";
+import { CursoEntity as Curso } from "../entities/CursoEntity";
 import { DataSource, Repository } from "typeorm";
 
 
@@ -33,7 +33,7 @@ export class CursoRepository {
          {id},
       {
          nome: curso.nome,
-         valor: curso.valor
+         preco: curso.preco
       })
       return await this.repositoryCurso.findOneBy({id});
 
