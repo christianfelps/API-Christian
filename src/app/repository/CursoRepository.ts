@@ -24,16 +24,13 @@ export class CursoRepository {
          return await this.repositoryCurso.save(
             this.repositoryCurso.create(curso)
          );
-        
-       
    }
-
-    public async update(id: number, curso: Curso){
+   //Update antigo. Estou usando o Create agora com Object.assign()
+   public async update(id: number, curso: Curso){
          const result = await this.repositoryCurso.update(
          {id},
       {
-         nome: curso.nome,
-         preco: curso.preco
+        ...curso
       })
       return await this.repositoryCurso.findOneBy({id});
 

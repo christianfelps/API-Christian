@@ -46,27 +46,29 @@ export class CursoController {
  // se eu receber somente o nome atualizo so o nome
     public update = async (req: Request<IParams>, res: Response) => {
         try {
-            const cursoParaAtualizar = await this.CursoService.findById(Number(req.params.id));
-
-            const atualiza: Curso = {
-                id: cursoParaAtualizar.id,
-                nome: cursoParaAtualizar.nome,
-                descricao: cursoParaAtualizar.descricao,
-                preco: cursoParaAtualizar.preco
-            }
-            if(req.body.nome) {
-                atualiza.nome = req.body.nome;
-            }
-            if(req.body.descricao) {
-                atualiza.descricao = req.body.descricao;
-            }
-            if(req.body.preco) {
-                atualiza.preco = req.body.preco;
-            }
-            const atualizar: Curso = { ...atualiza}
+            const cursoExistente = await this.CursoService.findById(Number(req.params.id));
             
-            const curso = await this.CursoService.update(Number(req.params.id), atualizar);
+            if(!cursoExistente ){
+                return res.status(StatusCodes.NOT_FOUND).json({ msg: "Curso não encontrado" });
+            
+            }
+            //O primeiro Spreed ira popular o objeto o segundo ira substituir 
+            // as propriedades iguais e que foram passados no body
+           
+            const cursoAtualiazado: Curso = {
+                ...cursoExistente ,
+                ...req.body
+            };
+            
+                    
+            const curso = await this.CursoService.update(
+                Number(req.params.id),
+                 cursoAtualiazado
+            );
+
+
             if (curso instanceof Error) return res.status(StatusCodes.NOT_FOUND).json({ msg: curso.message });
+
             return res.status(StatusCodes.OK).json(curso);
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: "Erro interno", error});
