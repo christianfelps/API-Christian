@@ -35,19 +35,16 @@ export class CursoService {
     }
 
     public async update(id: number, curso: Curso): Promise<Curso > {
-        const cursoUpdated = await this.cursoRepository.update(id, curso)
-        if (!cursoUpdated) {
-            throw new Error("Erro ao atualizar curso")
-        }
-        return cursoUpdated
+        const cursoUpdated = await this.cursoRepository.getId(id);
+        if (!cursoUpdated) throw new Error("Erro ao atualizar curso")
+        Object.assign(cursoUpdated, curso);
+        await this.cursoRepository.create(cursoUpdated);
+        return cursoUpdated;
     }
 
    public async remove(id: number): Promise<void> {
-    console.log("Iniciando busca para remover curso:", id);
     const cursoToRemove = await this.findById(id);
-    console.log("Busca concluída, iniciando delete:", cursoToRemove.id);
     await this.cursoRepository.deleteCurso(cursoToRemove.id);
-    console.log("Delete concluído");
 }
 
 }

@@ -16,6 +16,6 @@ export class CursoEntity {
     @Length(10, 150)
     descricao!: string;
     
-    @Column("decimal", { precision: 10, scale: 2 })
+    @Column("decimal", { precision: 10, scale: 2, nullable: false})
     preco!: number;
 }
