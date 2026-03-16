@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { CursoService } from '../service/CursoService'
-import { CursoEntity  as Curso} from '../entities/CursoEntity';
+import {Curso} from '../entities/Curso';
 import { inject, injectable } from 'tsyringe';
 import { IParams } from '../interfaces/Interfaces';
 import { StatusCodes } from 'http-status-codes';

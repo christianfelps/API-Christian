@@ -8,10 +8,10 @@ export const appDataSource = new DataSource({
             database: "api",
             username: "root",
             password: "root",
-            synchronize: false,
             logging: false,
             entities: ["src/app/entities/*.ts"],
-            migrations: ["src/app/database/migration/*.ts"],
+            migrations: ["src/app/database/migrations/*{.js,.ts}"],
+            subscribers: [],
         });
         
     

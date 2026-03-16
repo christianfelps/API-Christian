@@ -5,7 +5,12 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/app/server.ts"
+    "dev": "nodemon ./src/app/server.ts",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate src/app/database/migrations/autoMigration -d src/app/database/dataSource.ts",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d src/app/database/dataSource.ts",
+    "migration:down": "typeorm-ts-node-commonjs migration:revert -d src/app/database/dataSource.ts"
+
+    
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { CursoEntity as Curso } from "../entities/CursoEntity";
+import { Curso } from "../entities/Curso";
 import { DataSource, Repository } from "typeorm";
 
 
